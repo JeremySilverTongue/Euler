@@ -1,30 +1,32 @@
 import sympy
 import collections
 
-#print sympy.isprime(10)
+# print sympy.isprime(10)
+
 
 def digits(n):
-	return map(int,str(n))
-
+    return map(int, str(n))
 
 
 def rotations(n):
-	number_digits = collections.deque(digits(n))
-	rots = []
-	for x in range(len(number_digits)):
-		number_digits.rotate()
-		rots.append(int("".join(map(str,list(number_digits)))))
-	return rots
+    number_digits = collections.deque(digits(n))
+    rots = []
+    for x in range(len(number_digits)):
+        number_digits.rotate()
+        rots.append(int("".join(map(str, list(number_digits)))))
+    return rots
+
 
 def check_circular_prime(n):
-	return all(map(sympy.isprime,rotations(n)))
+    return all(map(sympy.isprime, rotations(n)))
+
 
 def find_circular_primtes(limit=100):
-	palindromes = []
-	for x in range(limit):
-		if check_circular_prime(x):
-			palindromes.append(x)
-	return palindromes
+    palindromes = []
+    for x in range(limit):
+        if check_circular_prime(x):
+            palindromes.append(x)
+    return palindromes
 
 
 # print rotations(123234567876545678)

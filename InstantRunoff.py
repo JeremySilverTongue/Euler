@@ -6,15 +6,17 @@ from collections import Counter
 import unittest
 import logging
 
+
 class Vote:
     """Holds a ranked list of preferences"""
 
     def __init__(self, *preferences):
         self.preferences = preferences
 
-    def get_preference(self, elminated = ()):
+    def get_preference(self, elminated=()):
         """Retrieves the top preference (or None), subject to any eliminated candidates"""
-        cleaned_preferences = filter(lambda x: x not in elminated, self.preferences)
+        cleaned_preferences = filter(
+            lambda x: x not in elminated, self.preferences)
         if cleaned_preferences:
             return cleaned_preferences[0]
 
@@ -51,13 +53,12 @@ class TestVote(unittest.TestCase):
         self.assertIsNone(vote.get_preference([prefernce1, prefernce2]))
 
 
-
 class Election:
 
     def __init__(self, votes):
         self.votes = votes
 
-    def get_winner(self, elminated = None):
+    def get_winner(self, elminated=None):
         if len(self.votes) == 0:
             logging.warning("\tParticipate in the democratic process!")
             return None
@@ -70,13 +71,15 @@ class Election:
             return tally.most_common(1)[0][0]
         else:
             if self.tie(tally):
-                logging.warning("\tCrap, there's a tie. Resolving arbitrarily.")
+                logging.warning(
+                    "\tCrap, there's a tie. Resolving arbitrarily.")
             last_place = tally.most_common()[-1][0]
             logging.info("\t{} eliminated.".format(last_place))
             return self.get_winner(elminated + [last_place])
 
     def tally_votes(self, elminated):
-        ranked = Counter([vote.get_preference(elminated) for vote in self.votes if vote.get_preference(elminated)])
+        ranked = Counter([vote.get_preference(elminated)
+                          for vote in self.votes if vote.get_preference(elminated)])
 
         logging.info("\tStandings with {} eliminated:".format(elminated))
         logging.info("\t\t{}".format(ranked))
@@ -88,6 +91,7 @@ class Election:
 
     def tie(self, tally):
         return len(tally) > 1 and tally.most_common()[-1][1] == tally.most_common()[-2][1]
+
 
 class TestElection(unittest.TestCase):
 
@@ -131,15 +135,16 @@ class TestElection(unittest.TestCase):
         election = Election(votes)
         self.assertEqual(candidate1, election.get_winner())
 
+
 def run_election():
     test_votes = [
-        Vote("Alice" ,"Bob", "Charlie"),
-        Vote("Alice" ,"Bob", "Charlie"),
+        Vote("Alice", "Bob", "Charlie"),
+        Vote("Alice", "Bob", "Charlie"),
         Vote("Bob", "Charlie", "Alice"),
-        Vote("Charlie", "Alice" ,"Bob"),
-        Vote("Bob" ,"Bob", "Charlie"),
-        Vote("Dave" ,"Edward", "Kasper"),
-        Vote("Dave" ,"Bob", "Charlie"),
+        Vote("Charlie", "Alice", "Bob"),
+        Vote("Bob", "Bob", "Charlie"),
+        Vote("Dave", "Edward", "Kasper"),
+        Vote("Dave", "Bob", "Charlie"),
     ]
 
     election = Election(test_votes)

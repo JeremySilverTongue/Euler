@@ -21,26 +21,26 @@ raw_data = "73167176531330624919225119674426574742355349194934\
 
 
 def raw_data_to_digits(raw_data):
-	return [int(x) for x in raw_data]
+    return [int(x) for x in raw_data]
+
 
 def product(list):
-	prod = 1
-	for item in list:
-		prod *= item
-	return prod
+    prod = 1
+    for item in list:
+        prod *= item
+    return prod
+
 
 def max_product(raw_data, length):
-	digits = raw_data_to_digits(raw_data)
-	start = 0
-	max_found = 0
-	while start + length < len(digits):
-		prod = product(digits[start:start+length])
-		if prod > max_found:
-			max_found = prod
-		start += 1
-	return max_found
-
-
+    digits = raw_data_to_digits(raw_data)
+    start = 0
+    max_found = 0
+    while start + length < len(digits):
+        prod = product(digits[start:start + length])
+        if prod > max_found:
+            max_found = prod
+        start += 1
+    return max_found
 
 
 print max_product(raw_data, 13)

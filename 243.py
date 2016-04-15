@@ -5,7 +5,6 @@
 # n = 100000000
 
 
-
 # def summarum(phi, num, denom):
 #     s = 0
 #     limit = fractions.Fraction(num, denom)
@@ -68,14 +67,16 @@ import numbthy
 #         print x,","
 
 
-primorial = [2, 6, 30, 210, 2310, 30030, 510510, 9699690, 223092870, 6469693230, 200560490130, 7420738134810, 304250263527210, 13082761331670030, 614889782588491410, 32589158477190044730, 1922760350154212639070]
+primorial = [2, 6, 30, 210, 2310, 30030, 510510, 9699690, 223092870, 6469693230, 200560490130, 7420738134810,
+             304250263527210, 13082761331670030, 614889782588491410, 32589158477190044730, 1922760350154212639070]
 
-def increasing_phi(limit = 1000):
+
+def increasing_phi(limit=1000):
     x = 0
     y = 1
     counter = 0
     pri = primorial[x]
-    next_pri = primorial[x+1]
+    next_pri = primorial[x + 1]
     while counter < limit:
         counter += 1
         if pri * y < next_pri:
@@ -85,14 +86,8 @@ def increasing_phi(limit = 1000):
             x += 1
             y = 1
             pri = primorial[x]
-            next_pri = primorial[x+1]
+            next_pri = primorial[x + 1]
 
 for x in increasing_phi():
-    print x#, float(numbthy.eulerphi(x))/(x-1), float(15499)/ 94744 ,\
-    #float(numbthy.eulerphi(x))/(x-1)< float(15499)/ 94744 
-
-
-
-
-
-
+    print x  # , float(numbthy.eulerphi(x))/(x-1), float(15499)/ 94744 ,\
+    #float(numbthy.eulerphi(x))/(x-1)< float(15499)/ 94744

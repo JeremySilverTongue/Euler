@@ -2,33 +2,36 @@
 import collections
 import functools
 
+
 class memoized(object):
     '''Decorator. Caches a function's return value each time it is called.
     If called later with the same arguments, the cached value is returned
     (not reevaluated).
     '''
+
     def __init__(self, func):
-       self.func = func
-       self.cache = {}
+        self.func = func
+        self.cache = {}
+
     def __call__(self, *args):
-       if not isinstance(args, collections.Hashable):
-          # uncacheable. a list, for instance.
-          # better to not cache than blow up.
-          return self.func(*args)
-       if args in self.cache:
-          return self.cache[args]
-       else:
-          value = self.func(*args)
-          self.cache[args] = value
-          return value
+        if not isinstance(args, collections.Hashable):
+            # uncacheable. a list, for instance.
+            # better to not cache than blow up.
+            return self.func(*args)
+        if args in self.cache:
+            return self.cache[args]
+        else:
+            value = self.func(*args)
+            self.cache[args] = value
+            return value
+
     def __repr__(self):
-       '''Return the function's docstring.'''
-       return self.func.__doc__
+        '''Return the function's docstring.'''
+        return self.func.__doc__
+
     def __get__(self, obj, objtype):
-       '''Support instance methods.'''
-       return functools.partial(self.__call__, obj)
-
-
+        '''Support instance methods.'''
+        return functools.partial(self.__call__, obj)
 
 
 raw_data = """75
@@ -65,14 +68,16 @@ def parse_raw_data(raw_data):
     lines = raw_data.split("\n")
     data = []
     for line in lines:
-        data.append(map(int,line.split()))
+        data.append(map(int, line.split()))
     return data
 
-def cost_of_leftmost_path(data,row,column):
-    return sum([data[row_index][column] for row_index in range(row,len(data))])
 
-def cost_of_rightmost_path(data,row,column):
-    return sum([data[row+offset][column+offset] for offset in range(len(data)-row)])
+def cost_of_leftmost_path(data, row, column):
+    return sum([data[row_index][column] for row_index in range(row, len(data))])
+
+
+def cost_of_rightmost_path(data, row, column):
+    return sum([data[row + offset][column + offset] for offset in range(len(data) - row)])
 
 
 test_data = parse_raw_data(raw_data)
@@ -83,18 +88,16 @@ data = big_data
 path_memo = {}
 
 
-def simple_find_path(row,column):
+def simple_find_path(row, column):
 
-    if (row,column) not in path_memo:
+    if (row, column) not in path_memo:
         cost = data[row][column]
-        if row < len(data) -1:
-            right_subtree = simple_find_path(row+1, column+1)
-            left_subtree = simple_find_path(row+1, column)
+        if row < len(data) - 1:
+            right_subtree = simple_find_path(row + 1, column + 1)
+            left_subtree = simple_find_path(row + 1, column)
             cost += max([right_subtree, left_subtree])
-        path_memo[(row,column)] = cost
-    return path_memo[(row,column)]
-
-
+        path_memo[(row, column)] = cost
+    return path_memo[(row, column)]
 
 
 # print mini_data
@@ -107,12 +110,6 @@ print simple_find_path(0, 0)
 # print cost_of_rightmost_path(data,0,0)
 
 
-
-
-
-
-
-
 # def find_path(data,row,column):
 #     # print "Finding cost of subtree rooted at {row}, {column}".format(row=row, column=column)
 #     cost = data[row][column]
@@ -121,7 +118,8 @@ print simple_find_path(0, 0)
 #         left_choice = data[row+1][column]
 #         right_choice = data[row+1][column+1]
 
-#         print "at", cost,"left_choice", left_choice, "right_choice", right_choice
+# print "at", cost,"left_choice", left_choice, "right_choice",
+# right_choice
 
 #         # print "recursive case"
 #         right_path = cost_of_rightmost_path(data,row, column)
@@ -133,7 +131,6 @@ print simple_find_path(0, 0)
 #         else:
 #             print "going right to", right_choice
 #             cost += find_path(data, row+1, column+1)
-
 
 
 #         # if cost_of_left_path > cost_of_right_subtree:
@@ -148,12 +145,3 @@ print simple_find_path(0, 0)
 #         # print cost_of_right_subtree
 #         # print cost_of_left_path
 #     return cost
-
-
-
-
-
-
-
-
-

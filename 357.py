@@ -7,22 +7,23 @@
 import numbthy
 import sympy
 
-def divisors(n):   
-    return set(reduce(list.__add__, 
-                ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0)))
+
+def divisors(n):
+    return set(reduce(list.__add__,
+                      ([i, n // i] for i in range(1, int(n**0.5) + 1) if n % i == 0)))
+
 
 def is_prime_generator(n):
-	return n if all([sympy.isprime(d + n/d) for d in divisors(n)]) else 0
+    return n if all([sympy.isprime(d + n / d) for d in divisors(n)]) else 0
 
 counter = 0
 limit = 100000000
 index = 1
 n = 1
 while n < limit:
-	n = sympy.prime(index) -1
-	index += 1
-	counter += is_prime_generator(n)
-
+    n = sympy.prime(index) - 1
+    index += 1
+    counter += is_prime_generator(n)
 
 
 print counter

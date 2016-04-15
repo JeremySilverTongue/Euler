@@ -1,6 +1,3 @@
 
 
-
-
-
 def find_intersection()

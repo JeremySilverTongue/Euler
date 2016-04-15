@@ -1,9 +1,10 @@
 
 FILE_NAME = "p082_matrix.txt"
 
-def load_data(file_name = FILE_NAME):
-	with open(file_name) as data_file:
-		return [map(int,line.split(",")) for line in data_file]
+
+def load_data(file_name=FILE_NAME):
+    with open(file_name) as data_file:
+        return [map(int, line.split(",")) for line in data_file]
 
 
 # LAST_UP = 1
@@ -30,18 +31,17 @@ def load_data(file_name = FILE_NAME):
 # 	return path_memo[key]
 
 
-
 # # grid = [[1,1,1],[2,0,2],[5,0,0]]
 
 # # grid = load_data()
 
 grid = [
-	[131, 673, 234, 103,  18],
-	[201,  96, 342, 965, 150],
-	[630, 803, 746, 422, 111],
-	[537, 699, 497, 121, 956],
-	[805, 732, 524,  37, 331]
-	]
+    [131, 673, 234, 103,  18],
+    [201,  96, 342, 965, 150],
+    [630, 803, 746, 422, 111],
+    [537, 699, 497, 121, 956],
+    [805, 732, 524,  37, 331]
+]
 
 # grid = [
 # 	[100,0,0,0,0],
@@ -64,51 +64,51 @@ grid = [
 
 
 class Queue:
-	def __init__(self, starting_dictionary = None):
-		if starting_dictionary is None:
-			self.dict = {}
-		else:
-			self.dict = starting_dictionary
 
-	def add(self, key, value):
-		if key not in self.dict or self.dict[key] > value:
-			self.dict[key] = value
+    def __init__(self, starting_dictionary=None):
+        if starting_dictionary is None:
+            self.dict = {}
+        else:
+            self.dict = starting_dictionary
 
-	def isNotEmpty(self):
-		return True if self.dict else False
+    def add(self, key, value):
+        if key not in self.dict or self.dict[key] > value:
+            self.dict[key] = value
 
-	def pop(self):
-		if self.isNotEmpty():
-			key = min(self.dict.keys())
-			return key, self.dict.pop(key)
+    def isNotEmpty(self):
+        return True if self.dict else False
+
+    def pop(self):
+        if self.isNotEmpty():
+            key = min(self.dict.keys())
+            return key, self.dict.pop(key)
 
 queue = Queue()
 print queue.isNotEmpty()
-queue.add((1,2), 3)
+queue.add((1, 2), 3)
 print queue.isNotEmpty()
-(x,y),cost =  queue.pop()
+(x, y), cost = queue.pop()
 print x, y, cost
 print queue.isNotEmpty()
 
 
-
 def add_node(grid, visited, frontier, cost_so_far, y, x):
-	height = len(grid)
-	width = len(grid[0])
-	if (0 <= x < width) and (0 <= y < height):
-		new_cost = cost_so_far + grid[y][x]
-		key = (y, x)
-		if key not in visited or visited[key] > new_cost:
-			frontier.append((new_cost, y, x))
-			# print "Adding {} to frontier".format(key)
-			visited[new_cost] = key
+    height = len(grid)
+    width = len(grid[0])
+    if (0 <= x < width) and (0 <= y < height):
+        new_cost = cost_so_far + grid[y][x]
+        key = (y, x)
+        if key not in visited or visited[key] > new_cost:
+            frontier.append((new_cost, y, x))
+            # print "Adding {} to frontier".format(key)
+            visited[new_cost] = key
 
 # def search(grid):
 # 	height = len(grid)
 # 	width = len(grid[0])
 # 	visited = dict([((y, 0), grid[y][0]) for y in range(height)])
 # 	# print visited
-# 	frontier = [(grid[y][0],y, 0) for y in range(height)] 
+# 	frontier = [(grid[y][0],y, 0) for y in range(height)]
 # 	sucessful_path_scores = []
 # 	counter = 0
 # 	while frontier:
@@ -123,11 +123,10 @@ def add_node(grid, visited, frontier, cost_so_far, y, x):
 # 		add_node(grid, visited,frontier, cost_so_far, y    , x + 1)
 # 		add_node(grid, visited,frontier, cost_so_far, y-1    , x )
 # 		# add_node(grid, visited,frontier, cost_so_far, y+1    , x )
-# 		# print "finished expanding",  y, x				
+# 		# print "finished expanding",  y, x
 # 	# print "Didn't find it? That shouldn't happen..."
 # 	# print visited
 # 	# print frontier
-
 
 
 # grid = load_data()

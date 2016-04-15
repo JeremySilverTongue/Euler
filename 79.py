@@ -1,8 +1,7 @@
 
 
 with open("p079_keylog.txt") as keys:
-	data = [line.strip() for line in keys]
-
+    data = [line.strip() for line in keys]
 
 
 # def add_key(passcode, key):
@@ -25,20 +24,18 @@ with open("p079_keylog.txt") as keys:
 
 def check_key(passcode, keys):
 
-	for key in keys:
-		passcode_index = 0
-		for char in key:
-			found = False
-			while passcode_index < len(passcode):
-				if passcode[passcode_index] == char:
-					found = True
-					break
-				passcode_index += 1
-			if not found:
-				return False
-	return True
-	
-
+    for key in keys:
+        passcode_index = 0
+        for char in key:
+            found = False
+            while passcode_index < len(passcode):
+                if passcode[passcode_index] == char:
+                    found = True
+                    break
+                passcode_index += 1
+            if not found:
+                return False
+    return True
 
 
 # print add_key([],"123")
@@ -49,13 +46,6 @@ def check_key(passcode, keys):
 
 print data
 for x in xrange(1000000000):
-	if check_key(str(x), data):
-		print x
-		break
-
-
-
-
-
-
-
+    if check_key(str(x), data):
+        print x
+        break

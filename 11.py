@@ -1,4 +1,4 @@
-raw_data= """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+raw_data = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
@@ -21,37 +21,42 @@ raw_data= """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 
 
 def parse_raw_data(data):
-    return [map(int,row.split()) for row in raw_data.split('\n')]
+    return [map(int, row.split()) for row in raw_data.split('\n')]
 
-def safe_access(data,x,y):
+
+def safe_access(data, x, y):
     result = 0
     if -1 < y < len(data) and -1 < x < len(data[0]):
         result = data[y][x]
     return result
 
-def right_product(data, x, y, length = 4):
+
+def right_product(data, x, y, length=4):
     product = 1
     for offset in range(length):
-        product *= safe_access(data, x+offset, y)
+        product *= safe_access(data, x + offset, y)
     return product
 
-def down_product(data, x, y, length = 4):
-    product = 1
-    for offset in range(length):
-        product *= safe_access(data, x, y+offset)
-    return product    
 
-def down_right_product(data, x, y, length = 4):
+def down_product(data, x, y, length=4):
     product = 1
     for offset in range(length):
-        product *= safe_access(data, x+offset, y+offset)
+        product *= safe_access(data, x, y + offset)
     return product
 
-def down_left_product(data, x, y, length = 4):
+
+def down_right_product(data, x, y, length=4):
     product = 1
     for offset in range(length):
-        product *= safe_access(data, x-offset, y+offset)
-    return product  
+        product *= safe_access(data, x + offset, y + offset)
+    return product
+
+
+def down_left_product(data, x, y, length=4):
+    product = 1
+    for offset in range(length):
+        product *= safe_access(data, x - offset, y + offset)
+    return product
 
 
 def find_max_product(raw_data):
@@ -69,11 +74,6 @@ def find_max_product(raw_data):
                 if product > max_product:
                     max_product = product
     return max_product
-
-
-
-
-
 
 
 print find_max_product(raw_data)

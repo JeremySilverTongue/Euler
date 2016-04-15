@@ -19,8 +19,6 @@
 # 		n += 1
 
 
-
-
 # count = Counter("1234")
 # print count
 # count.update("567")
@@ -28,22 +26,20 @@
 
 # for x in range(100000):
 # for x in range(0,10000):
-	# find_pandigital_product(x)
-
+# find_pandigital_product(x)
 
 
 def problem38():
-    largest=int()
+    largest = int()
     intex = 0
-    for i in xrange(9000,10000):
-        temp=str(i)+str(i*2)
+    for i in xrange(9000, 10000):
+        temp = str(i) + str(i * 2)
         if "0" not in temp:
-            if len(set(temp))==9:
-                if int(temp)>largest:
-                    largest=int(temp)
+            if len(set(temp)) == 9:
+                if int(temp) > largest:
+                    largest = int(temp)
                     index = i
 
-    return index, largest 
+    return index, largest
 
 print problem38()
-

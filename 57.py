@@ -8,7 +8,6 @@ from fractions import Fraction
 # 	return convergent
 
 
-
 # denoms = [1,2]
 # counter = 0
 
@@ -21,16 +20,16 @@ from fractions import Fraction
 
 # print continued_fraction([1, 2,2,2,2]).numerator
 
-def count(limit = 1000):
-	convergent = 0
-	counter = 0
-	for x in range(limit):
-		convergent =Fraction(1, 2 + convergent)
-		out = convergent +1
-		if len(str(out.numerator)) > len(str(out.denominator)):
-			counter += 1
-			print out
-	return counter
+def count(limit=1000):
+    convergent = 0
+    counter = 0
+    for x in range(limit):
+        convergent = Fraction(1, 2 + convergent)
+        out = convergent + 1
+        if len(str(out.numerator)) > len(str(out.denominator)):
+            counter += 1
+            print out
+    return counter
 
 
 print count()
